@@ -15,8 +15,8 @@ Currently it works on Windows only, with the `CaptureManagerDriver`, based on [C
 # Simple example with JavaFX
 
 ```java
-import com.github.eduramiba.webcamcapture.drivers.WebcamDeviceWithBufferOperations;
-import com.github.eduramiba.webcamcapture.drivers.capturemanager.CaptureManagerDriver;
+import WebcamDeviceWithBufferOperations;
+import CaptureManagerDriver;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamDevice;
 import java.util.concurrent.Executors;
