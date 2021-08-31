@@ -139,12 +139,12 @@ public interface Webcamera {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             final Native aNative = (Native) o;
-            return Objects.equals(_webcam, aNative._webcam);
+            return Objects.equals(_identifier, aNative._identifier);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(_webcam);
+            return Objects.hash(_identifier);
         }
 
         @Override
@@ -154,7 +154,7 @@ public interface Webcamera {
 
         @Override
         public String name() {
-            return _name;
+            return String.format("%s (%s)", _name, shortName());
         }
 
         @Override

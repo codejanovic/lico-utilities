@@ -48,7 +48,7 @@ public interface Webcameras {
             final WebcamsInitiatedEvent initiatedEvent = new WebcamsInitiatedEvent();
             final Set<Webcamera> webcams = Webcam.getWebcams().stream() //
                     .map(Webcamera.Native::new) //
-                    .peek(w -> _log.info("initializing webcam: {}", w.name())) //
+                    .peek(w -> _log.info("{}: initiliazing webcam", w.name())) //
                     .collect(Collectors.toSet());
 
             initiatedEvent.all.addAll(webcams);
@@ -61,6 +61,7 @@ public interface Webcameras {
             for (Webcamera webcam : _webcams) {
                 final WebcamSettings camSettings = _settings.findOrCreate(webcam);
                 if (camSettings.isUsed()) {
+                    _log.info("{}: opening webcam", webcam.name());
                     webcam.open();
                 }
             }

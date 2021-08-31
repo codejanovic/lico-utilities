@@ -65,11 +65,13 @@ public interface WebcameraImageStream {
 
         @Override
         public void open() {
+            _log.info("{}: starting stream", _webcam.name());
             _scheduler.scheduleAtFixedRate(this::process, 1000, _fps.getTime(), _fps.getTimeUnit());
         }
 
         @Override
         public void close() {
+            _log.info("{}: stopping stream", _webcam.name());
             _stopped.set(true);
             _subscriber.forEach(s -> _eventbus.send(new Webcamera.UnsubscribedStreamEvent(_webcam, s)));
         }
