@@ -2,6 +2,7 @@ package org.lico.utilities.webcam.streamer.server;
 
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpServer;
+import org.greenrobot.eventbus.ThreadMode;
 import org.lico.utilities.webcam.streamer.inject.Eventbus;
 import org.lico.utilities.webcam.streamer.settings.ApplicationSettings;
 import org.lico.utilities.webcam.streamer.webcam.WebcamStreamSubscriber;
@@ -68,13 +69,13 @@ public class WebServer {
 
     private HttpServer _server;
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.ASYNC)
     public void onRestart(final RestartEvent event) {
         stop();
         start();
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.ASYNC)
     public void onWebcamClosed(final Webcamera.ClosedEvent event) {
         stop();
         start();

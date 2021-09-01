@@ -1,6 +1,7 @@
 package org.lico.utilities.webcam.streamer.webcam;
 
 import com.github.sarxos.webcam.Webcam;
+import org.greenrobot.eventbus.ThreadMode;
 import org.lico.utilities.webcam.streamer.Bootstrap;
 import org.lico.utilities.webcam.streamer.inject.Eventbus;
 import org.lico.utilities.webcam.streamer.server.WebServer;
@@ -41,7 +42,7 @@ public interface Webcameras {
             _eventbus.register(this);
         }
 
-        @Subscribe
+        @Subscribe(threadMode = ThreadMode.ASYNC)
         public void onApplicationStarted(final Bootstrap.ApplicationStartedEvent ignore) {
             _log.info("Received {} event, will init Webcams ...", ignore.getClass().getSimpleName());
             _settings.load();

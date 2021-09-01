@@ -1,6 +1,7 @@
 package org.lico.utilities.webcam.streamer.webcam;
 
 
+import org.greenrobot.eventbus.ThreadMode;
 import org.lico.utilities.webcamcapture.drivers.capturemanager.CaptureManagerVideoDevice;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamUtils;
@@ -118,7 +119,7 @@ public interface Webcamera {
             _stream = new WebcameraImageStream.Loop(this, FramesPerSecond.FPS_10);
         }
 
-        @Subscribe
+        @Subscribe(threadMode = ThreadMode.ASYNC)
         public void onStreamSubscribe(final SubscribeStreamEvent event) {
             if (!event.webcamera.equals(this)) {
                 return;
@@ -126,7 +127,7 @@ public interface Webcamera {
             _stream.subscribe(event.subscriber);
         }
 
-        @Subscribe
+        @Subscribe(threadMode = ThreadMode.ASYNC)
         public void onStreamUnsubscribe(final UnsubscribeStreamEvent event) {
             if (!event.webcamera.equals(this)) {
                 return;
@@ -201,7 +202,7 @@ public interface Webcamera {
             _eventbus.send(new ClosedEvent(this));
         }
 
-        @Subscribe
+        @Subscribe(threadMode = ThreadMode.ASYNC)
         public void onWebcameraCloseEvent(final Webcamera.CloseEvent event) {
             if (!event.webcamera.equals(this)) {
                 return;
@@ -209,7 +210,7 @@ public interface Webcamera {
             close();
         }
 
-        @Subscribe
+        @Subscribe(threadMode = ThreadMode.ASYNC)
         public void onWebcameraOpenEvent(final Webcamera.OpenEvent event) {
             if (!event.webcamera.equals(this)) {
                 return;
