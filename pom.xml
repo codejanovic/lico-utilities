@@ -27,7 +27,7 @@
         <jusecase.inject.version>1.0.0</jusecase.inject.version>
         <jusecase.builders.version>0.3.0</jusecase.builders.version>
 
-        <eclipse.collection.version>10.4.0</eclipse.collection.version>
+        <eclipse.collection.version>11.0.0</eclipse.collection.version>
 
         <log4j.version>2.17.1</log4j.version>
         <slf4j.version>1.7.32</slf4j.version>
