@@ -1,6 +1,6 @@
 package org.lico.utilities.webcam.streamer.settings;
 
-import org.lico.utilities.webcam.streamer.webcam.Webcamera;
+import org.lico.utilities.webcam.streamer.webcam.WebcameraId;
 
 import java.util.Objects;
 
@@ -9,21 +9,21 @@ public class WebcamSettings {
     private String webcamName;
 
     private String identifier;
+    private boolean used;
 
-    public WebcamSettings(final Webcamera webcam, final String shortName) {
-        this.shortName = shortName;
+
+    public WebcamSettings(final WebcameraId webcam) {
+        shortName = webcam.shortName();
         webcamName = webcam.name();
         identifier = webcam.identifier();
         used = false;
     }
 
-    public String getIdentifier() {
-        return identifier;
+    public WebcamSettings() {
     }
 
-    private boolean used;
-
-    public WebcamSettings() {
+    public String getIdentifier() {
+        return identifier;
     }
 
     public void setIdentifier(final String identifier) {
@@ -35,12 +35,12 @@ public class WebcamSettings {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         final WebcamSettings that = (WebcamSettings) o;
-        return Objects.equals(webcamName, that.webcamName);
+        return Objects.equals(identifier, that.identifier);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(webcamName);
+        return Objects.hash(identifier);
     }
 
     public String getShortName() {

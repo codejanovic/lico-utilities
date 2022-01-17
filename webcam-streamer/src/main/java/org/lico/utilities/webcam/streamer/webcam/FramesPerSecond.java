@@ -1,5 +1,7 @@
 package org.lico.utilities.webcam.streamer.webcam;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
 
 public enum FramesPerSecond {
@@ -21,7 +23,11 @@ public enum FramesPerSecond {
         return TimeUnit.MILLISECONDS;
     }
 
+    public Duration getDuration() {
+        return Duration.of(getTime(), ChronoUnit.MILLIS);
+    }
+
     public long getTime() {
-        return 1000/_fps;
+        return 1000 / _fps;
     }
 }
