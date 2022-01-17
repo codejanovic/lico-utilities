@@ -28,5 +28,6 @@ public class Application {
         }
         _application = ActorSystem.create(ApplicationActor.create(), "application");
         _application.tell(ApplicationActor.Command.Initialize.It);
+        _application.getWhenTerminated().thenRun(() -> System.exit(0));
     }
 }

@@ -65,9 +65,7 @@ public class ApplicationActor extends AbstractActorTyped<ApplicationActor.Comman
     private Behavior<Command> onShutdown(final Command.Shutdown command) {
         _backend.tell(BackendActor.Command.Shutdown.It);
         _frontend.tell(FrontendActor.Command.Shutdown.It);
-        //TODO: wait for response of backend and frontend with timeout before exiting
-        System.exit(0);
-        return behaveUnitialized();
+        return Behaviors.stopped();
     }
 
 }
