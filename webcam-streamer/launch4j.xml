@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>C:\dev\machine\workspaces\open-source\lico-utilities\webcam-streamer\target\webcam-streamer-0.1.0-SNAPSHOT.jar</jar>
-  <outfile>C:\dev\machine\workspaces\open-source\lico-utilities\webcam-streamer\out\webcam-streamer.exe</outfile>
+  <jar>C:\dev\projects\lico-utilities\webcam-streamer\target\webcam-streamer-0.1.0-SNAPSHOT.jar</jar>
+  <outfile>C:\dev\projects\lico-utilities\webcam-streamer\out\webcam-streamer.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -19,12 +19,14 @@
     <windowTitle>Webcam Streamer</windowTitle>
   </singleInstance>
   <jre>
-    <path>jre</path>
+    <path>jre-17-azul</path>
     <bundledJre64Bit>true</bundledJre64Bit>
     <bundledJreAsFallback>false</bundledJreAsFallback>
-    <minVersion>11</minVersion>
+    <minVersion>17</minVersion>
     <maxVersion></maxVersion>
     <jdkPreference>preferJre</jdkPreference>
     <runtimeBits>64/32</runtimeBits>
+    <initialHeapSize>300</initialHeapSize>
+    <maxHeapSize>2000</maxHeapSize>
   </jre>
 </launch4jConfig>
