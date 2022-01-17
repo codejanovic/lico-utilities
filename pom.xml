@@ -21,7 +21,7 @@
         <maven.compiler.plugin>3.8.1</maven.compiler.plugin>
 
         <junit.version>4.13.2</junit.version>
-        <assertj.version>3.20.2</assertj.version>
+        <assertj.version>3.22.0</assertj.version>
 
         <jusecase.version>1.3.0</jusecase.version>
         <jusecase.inject.version>1.0.0</jusecase.inject.version>
@@ -29,19 +29,23 @@
 
         <eclipse.collection.version>10.4.0</eclipse.collection.version>
 
-        <log4j.version>2.13.3</log4j.version>
-        <slf4j.version>1.7.25</slf4j.version>
+        <log4j.version>2.17.0</log4j.version>
+        <slf4j.version>1.7.32</slf4j.version>
 
-        <tika.version>1.25</tika.version>
-        <greenrobot.version>3.2.0</greenrobot.version>
         <aalto-xml.version>1.3.0</aalto-xml.version>
         <webcam.capture.version>0.3.12</webcam.capture.version>
 
         <akka.version>2.6.16</akka.version>
+        <jackson.version>2.13.1</jackson.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.typesafe.akka</groupId>
                 <artifactId>akka-actor-typed_2.13</artifactId>
@@ -85,11 +89,6 @@
             </dependency>
             <dependency>
                 <groupId>org.jusecase</groupId>
-                <artifactId>inject</artifactId>
-                <version>${jusecase.inject.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jusecase</groupId>
                 <artifactId>jusecase</artifactId>
                 <version>${jusecase.version}</version>
             </dependency>
@@ -110,6 +109,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.jusecase</groupId>
+            <artifactId>inject</artifactId>
+            <version>${jusecase.inject.version}</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -156,21 +160,22 @@
                     <compilerArgs>
                         <arg>-XDignore.symbol.file</arg>
                     </compilerArgs>
+                    <useIncrementalCompilation>false</useIncrementalCompilation>
                     <meminitial>512m</meminitial>
                     <maxmem>2048m</maxmem>
                 </configuration>
             </plugin>
-            <!--
             <plugin>
                 <groupId>com.nickwongdev</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.12.1</version>
+                <version>1.12.6</version>
                 <configuration>
                     <complianceLevel>${maven.compiler.source}</complianceLevel>
                     <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <target>${maven.compiler.source}</target>
                     <showWeaveInfo>true</showWeaveInfo>
                     <verbose>true</verbose>
+                    <Xlint>ignore</Xlint>
                     <encoding>UTF-8</encoding>
                     <aspectLibraries>
                         <aspectLibrary>
@@ -182,7 +187,9 @@
                 <executions>
                     <execution>
                         <goals>
+                            <!-- use this goal to weave all your main classes -->
                             <goal>compile</goal>
+                            <!-- use this goal to weave all your test classes -->
                             <goal>test-compile</goal>
                         </goals>
                     </execution>
@@ -191,11 +198,10 @@
                     <dependency>
                         <groupId>org.aspectj</groupId>
                         <artifactId>aspectjtools</artifactId>
-                        <version>1.9.2</version>
+                        <version>1.9.5</version>
                     </dependency>
                 </dependencies>
             </plugin>
-            -->
         </plugins>
     </build>
 
