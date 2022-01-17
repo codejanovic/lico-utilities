@@ -168,20 +168,20 @@ public class SettingsActor extends AbstractActorTyped<SettingsActor.Command> {
 
     private Behavior<Command> onWebcamOpened(final Command.WebcamOpened command) {
         final WebcamSettings webcamSettings = _settings.findOrCreate(command.id);
-        webcamSettings.setUsed(true);
+        webcamSettings.autostart = true;
         saveSettingsToDisk(_settings);
         return Behaviors.same();
     }
 
     private Behavior<Command> onWebcamClosed(final Command.WebcamClosed command) {
         final WebcamSettings webcamSettings = _settings.findOrCreate(command.id);
-        webcamSettings.setUsed(false);
+        webcamSettings.autostart = false;
         saveSettingsToDisk(_settings);
         return Behaviors.same();
     }
 
     private Behavior<Command> onDriverChanged(final Command.DriverChanged command) {
-        _settings.setDriver(command.driver);
+        _settings.driver = command.driver;
         saveSettingsToDisk(_settings);
         return Behaviors.same();
     }

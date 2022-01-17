@@ -1,29 +1,14 @@
 package org.lico.utilities.webcam.streamer.settings;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class WebServerSettings {
-    private int port;
-    private boolean autostart;
+    @JsonProperty("http-port")
+    public int port;
 
     public WebServerSettings() {
         port = 8080;
-    }
-
-    public boolean isAutostart() {
-        return autostart;
-    }
-
-    public void setAutostart(final boolean autostart) {
-        this.autostart = autostart;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void setPort(final int port) {
-        this.port = port;
     }
 
     @JsonIgnore

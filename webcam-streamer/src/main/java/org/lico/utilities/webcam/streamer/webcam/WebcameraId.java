@@ -17,9 +17,11 @@ public interface WebcameraId extends ActorResourceName {
         private final String _name;
         private final String _shortname;
         private final String _arn;
+        private final String _nameUnique;
 
         public Unique(final Webcam webcam) {
-            _identifier = HexFormat.of().formatHex(__digest.digest(determineUniqueNamePerDriver(webcam).getBytes(StandardCharsets.UTF_8)));
+            _nameUnique = determineUniqueNamePerDriver(webcam);
+            _identifier = HexFormat.of().formatHex(__digest.digest(_nameUnique.getBytes(StandardCharsets.UTF_8)));
             _arn = "webcam-" + _identifier;
             _name = webcam.getName();
             _shortname = _identifier.substring(0, 6);
@@ -54,6 +56,11 @@ public interface WebcameraId extends ActorResourceName {
         }
 
         @Override
+        public String nameUnique() {
+            return _nameUnique;
+        }
+
+        @Override
         public String shortName() {
             return _shortname;
         }
@@ -64,6 +71,8 @@ public interface WebcameraId extends ActorResourceName {
     String identifier();
 
     String name();
+
+    String nameUnique();
 
     String shortName();
 }

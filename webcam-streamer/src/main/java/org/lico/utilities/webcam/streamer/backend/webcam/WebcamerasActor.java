@@ -102,7 +102,7 @@ public class WebcamerasActor extends AbstractActorTyped<WebcamerasActor.Command>
     }
 
     private void rediscover(final WebcameraDriver driver, final Collection<WebcamSettings> webcamSettings) {
-        final Map<String, WebcamSettings> webcamSettingsById = webcamSettings.stream().collect(Collectors.toMap(WebcamSettings::getIdentifier, v -> v));
+        final Map<String, WebcamSettings> webcamSettingsById = webcamSettings.stream().collect(Collectors.toMap(ws -> ws.identifier, v -> v));
 
         _webcams.values().forEach(this::stopActor);
         _webcams.clear();
@@ -124,7 +124,7 @@ public class WebcamerasActor extends AbstractActorTyped<WebcamerasActor.Command>
                 return;
             }
             final WebcamSettings webcamSetting = webcamSettingsById.get(id.identifier());
-            if (!webcamSetting.isUsed()) {
+            if (!webcamSetting.autostart) {
                 return;
             }
             webcam.tell(WebcameraActor.Command.Open.It);

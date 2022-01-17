@@ -154,7 +154,7 @@ public class HttpServerActor extends AbstractActorTyped<HttpServerActor.Command>
 
     private void startServer(final WebServerSettings settings) {
         try {
-            _httpServer = HttpServer.create(new InetSocketAddress(settings.getPort()), 0);
+            _httpServer = HttpServer.create(new InetSocketAddress(settings.port), 0);
 
             _httpServer.createContext("/", (rootHandler) -> {
                 final byte[] response = "<!DOCTYPE html><html><body>Server is up and running</body></html>".getBytes();
@@ -169,7 +169,7 @@ public class HttpServerActor extends AbstractActorTyped<HttpServerActor.Command>
             _httpServer.start();
 
         } catch (final IOException e) {
-            throw new IllegalStateException("unable to start server with port " + settings.getPort(), e);
+            throw new IllegalStateException("unable to start server with port " + settings.port, e);
         }
     }
 

@@ -173,8 +173,8 @@ public class BackendActor extends AbstractActorTyped<BackendActor.Command> {
     }
 
     private Behavior<Command> onSettingsInitialized(final Command.SettingsInitialized command) {
-        _httpServer.tell(new HttpServerActor.Command.Initialize(command.applicationSettings.getServer()));
-        _webcameras.tell(new WebcamerasActor.Command.Initialize(command.applicationSettings.getDriver(), command.applicationSettings.getWebcams()));
+        _httpServer.tell(new HttpServerActor.Command.Initialize(command.applicationSettings.server));
+        _webcameras.tell(new WebcamerasActor.Command.Initialize(command.applicationSettings.driver, command.applicationSettings.webcams));
         return Behaviors.same();
     }
 

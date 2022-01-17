@@ -1,34 +1,34 @@
 package org.lico.utilities.webcam.streamer.settings;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.lico.utilities.webcam.streamer.webcam.WebcameraId;
 
 import java.util.Objects;
 
 public class WebcamSettings {
-    private String shortName;
-    private String webcamName;
-
-    private String identifier;
-    private boolean used;
+    @JsonProperty("webcam-id")
+    public String identifier;
+    @JsonProperty("webcam-display-name")
+    public String webcamName;
+    @JsonProperty("webcam-short-name")
+    public String shortName;
+    @JsonProperty("webcam-unique-name")
+    public String uniqueName;
+    @JsonProperty("webcam-autostart")
+    public boolean autostart;
 
 
     public WebcamSettings(final WebcameraId webcam) {
         shortName = webcam.shortName();
         webcamName = webcam.name();
         identifier = webcam.identifier();
-        used = false;
+        uniqueName = webcam.nameUnique();
+        autostart = false;
     }
 
     public WebcamSettings() {
     }
 
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(final String identifier) {
-        this.identifier = identifier;
-    }
 
     @Override
     public boolean equals(final Object o) {
@@ -41,29 +41,5 @@ public class WebcamSettings {
     @Override
     public int hashCode() {
         return Objects.hash(identifier);
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(final String shortName) {
-        this.shortName = shortName;
-    }
-
-    public String getWebcamName() {
-        return webcamName;
-    }
-
-    public void setWebcamName(final String webcamName) {
-        this.webcamName = webcamName;
-    }
-
-    public boolean isUsed() {
-        return this.used;
-    }
-
-    public void setUsed(final boolean used) {
-        this.used = used;
     }
 }
