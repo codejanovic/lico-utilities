@@ -16,6 +16,7 @@ public class WebcameraIdTest {
     public void testHex() {
         final String actual = HexFormat.of().formatHex(__digest.digest("USB Video Device 0".getBytes(StandardCharsets.UTF_8)));
         final String expected = HexFormat.of().formatHex(__digest.digest("USB Video Device 0".getBytes(StandardCharsets.UTF_8)));
+        System.out.println(actual);
         assertThat(actual).isEqualTo(expected);
     }
 }
